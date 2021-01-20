@@ -1,0 +1,6 @@
+.App-title {
+  color: var(--not-hover-color);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 46px;
+  text-align: center;
+}
