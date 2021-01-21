@@ -4,3 +4,9 @@
   font-size: 46px;
   text-align: center;
 }
+
+@media screen and (max-width: 615px) {
+  .App-title {
+    font-size: 32px;
+  }   
+}

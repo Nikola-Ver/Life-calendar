@@ -1,0 +1,76 @@
+.Calendar {
+    border-top: 2px solid white;
+    width: 70vw;
+    height: 80vh;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+    overflow: auto;
+}
+
+.Calendar-cell {
+    border: 1px solid white;
+    background: #00021d;
+    border-radius: 4px;
+    height: 40px;
+    width: 40px;
+    padding: 5px;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    box-shadow: inset 0 0 15px 5px black;
+    transition: 0.3s transform, 0.3s box-shadow;
+}
+
+.Calendar-cell:hover {
+    transform: translateX(-5px) translateY(-5px);
+    box-shadow: inset 0 0 15px 5px black,
+                5px 5px 0 white;
+}
+
+.Calendar-cell > p {
+    user-select: none;
+    font-size: 22px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    text-shadow: 0 0 3px black;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0;
+    width: 40px;
+    color: white;
+}
+
+.Calendar-cell.ideally {
+    background: #6bbf67;
+}
+
+.Calendar-cell.good {
+    background: #a2c45e;
+}
+
+.Calendar-cell.normal {
+    background: #fec55f;
+}
+
+.Calendar-cell.bad {
+    background: #f7a160;
+}
+
+.Calendar-cell.awful {
+    background: #f13b50;
+}
+
+@media screen and (max-width: 615px) {
+    .Calendar {
+        width: 100vw;
+    }
+}
