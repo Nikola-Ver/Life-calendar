@@ -36,11 +36,19 @@ const Calendar: React.FC<CalendarProps> = (props) => {
     arrOfDoneTasks[1].length === 0 && 
     arrOfDoneTasks[2].length === 0
   ) {
-    fetch('http://localhost')
+    fetch('./index.js', 
+      {
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      }
+    )
       .then((response) => {
         return response.json();
       })
       .then((data) => {
+        console.log(data);
         setArrOfDoneTasks(data);
       });
   }

@@ -1,5 +1,5 @@
 function parseData(data) {
-    const items = [...data.matchAll(/[^ \n0-9]+?:/gm)].map(e => {
+    const items = [...data.matchAll(/[^\n0-9]+?:/gm)].map(e => {
         return e[0].replace(':', '').trim();
     });
     const itemsWithVal = [];
