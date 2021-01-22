@@ -26,16 +26,19 @@ interface Data {
   }
 }
 
+let flagFirstIn = true;
 
 const Calendar: React.FC<CalendarProps> = (props) => {
   // 0 - days, 1 - weeks, 2 - months
   let [arrOfDoneTasks, setArrOfDoneTasks] = useState<Array<Array<Data>>>([[], [], []]);
 
   if (
+    flagFirstIn &&
     arrOfDoneTasks[0].length === 0 &&
     arrOfDoneTasks[1].length === 0 &&
     arrOfDoneTasks[2].length === 0
   ) {
+    flagFirstIn = false;
     fetch('./index.js',
       {
         headers: {
@@ -196,7 +199,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
               <div className="Calendar-cell-info-content-title">
                 {e.name}
               </div>
-              <div contentEditable={true} className="Calendar-cell-info-content-text">
+              <div className="Calendar-cell-info-content-text">
                 {e.value}
               </div>
             </>
