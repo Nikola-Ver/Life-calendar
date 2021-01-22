@@ -194,7 +194,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
               <div className="Calendar-cell-info-content-title">
                 { e.name }
               </div>
-              <div className="Calendar-cell-info-content-text">
+              <div contentEditable={ true } className="Calendar-cell-info-content-text">
                 { e.value }
               </div>
             </>

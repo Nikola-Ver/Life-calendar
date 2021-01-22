@@ -32,7 +32,8 @@
         position: absolute;
         bottom: auto;
         top: -73px; 
-        left: 5px;
+        left: 0;
+        background-color: transparent;
         filter: invert(1);
         box-shadow: none;
     }
@@ -41,6 +42,7 @@
         bottom: auto;
         top: 12px;
         right: 5px;
+        background-color: transparent;
         filter: invert(1);
         box-shadow: none;
     }

@@ -106,6 +106,7 @@
     width: fit-content;
     margin: auto;
     font-size: 36px;
+    outline: none;
     -webkit-user-modify: read-write-plaintext-only;
 }
 
@@ -118,6 +119,7 @@
     margin-bottom: 30px;
     margin-left: 20px;
     margin-right: 20px;
+    outline: none;
     -webkit-user-modify: read-write-plaintext-only;
 }
 

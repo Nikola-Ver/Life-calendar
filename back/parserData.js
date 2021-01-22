@@ -7,19 +7,19 @@ module.exports = {
 
         items.reduce((current, next) => {
             const regExp = new RegExp(`(?<=${current}:)[^]*(?=${next}:)`, 'g'); 
-            itemsWithVal.push({ name: current, value: data.match(regExp)[0].replace(/\n/, '') });
+            itemsWithVal.push({ name: current, value: data.match(regExp)[0] });
             return next;
         });
 
         const regExpForLast = new RegExp(`(?<=${items[items.length - 1]}:)[^]*`, 'g'); 
-        itemsWithVal.push({ name: items[items.length - 1], value:  data.match(regExpForLast)[0].replace(/\n/, '') } )
+        itemsWithVal.push({ name: items[items.length - 1], value:  data.match(regExpForLast)[0] } )
 
         return {items: itemsWithVal, countTasks: [...data.matchAll(/^-/gm)].length };
     },
     parseToDate: (data) => {
         let fileData = '';
         data.forEach(e => {
-            if (e.name.length !== 0) fileData += `${e.name}:${e.value}\n`
+            if (e.name.length !== 0) fileData += `${e.name}:${e.value}`
         })
         return fileData;
     }
