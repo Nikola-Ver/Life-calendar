@@ -8,8 +8,10 @@ const parserData = require('./parserData');
 const pathToTasks = require('./pathToTasks.json');
 
 let tasks = [[], [], []]; // days, weeks, months
+let flagInWork = false;
 
 function updateTasks() {
+    flagWork = true;
     tasks = [[], [], []];
     fs.readdir(pathToTasks, (err, files) => {
         files.forEach(file => {
@@ -45,12 +47,13 @@ function updateTasks() {
         tasks[1] = parserDate.getWeeksFromDays(JSON.stringify(tasks[0]));
         tasks[2] = parserDate.getMonthsFromDays(JSON.stringify(tasks[0]));
     });
+    flagInWork = false;
 }
 
-updateTasks();
+!flagInWork && updateTasks();
 
 fs.watch(pathToTasks, (eventType, filename) => {
-    updateTasks();
+    !flagInWork && /[0-9]+?\.[0-9]+?\.[0-9]{4}\.txt/g.exec(filename) && updateTasks();
 });
 
 app.use(express.static(path.join(__dirname, '../front/build')));
