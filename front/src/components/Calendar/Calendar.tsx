@@ -3,9 +3,9 @@ import Editor from '../Editor/Editor';
 import { useState } from 'react';
 
 interface CalendarProps {
-    viewType: number;   
-    currentCell: any;
-    setCurrentCell: any
+  viewType: number;
+  currentCell: any;
+  setCurrentCell: any
 }
 
 interface Data {
@@ -32,13 +32,13 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   let [arrOfDoneTasks, setArrOfDoneTasks] = useState<Array<Array<Data>>>([[], [], []]);
 
   if (
-    arrOfDoneTasks[0].length === 0 && 
-    arrOfDoneTasks[1].length === 0 && 
+    arrOfDoneTasks[0].length === 0 &&
+    arrOfDoneTasks[1].length === 0 &&
     arrOfDoneTasks[2].length === 0
   ) {
-    fetch('./index.js', 
+    fetch('./index.js',
       {
-        headers : { 
+        headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         }
@@ -75,7 +75,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   // [
   //     { items: [{name: 'Mood', value: ' ideally'}], countTasks: 15, date: {day: 17, month: 1, year: 2021}, toDate: {day: 17, month: 1, year: 2021}},
   // ]]);
-       
+
   const arrOfElements: Array<any> = [];
 
   arrOfDoneTasks[props.viewType].forEach((outElement, index) => {
@@ -87,7 +87,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
         if (/normal/gi.exec(innerElement.value)) mood = 'normal';
         if (/bad/gi.exec(innerElement.value)) mood = 'bad';
         if (/awful/gi.exec(innerElement.value)) mood = 'awful';
-      } 
+      }
     });
 
     const classAndMood = `Calendar-cell ${mood}`;
@@ -99,34 +99,35 @@ const Calendar: React.FC<CalendarProps> = (props) => {
         const texts: any = calendar.getElementsByClassName('Calendar-cell-info-content-text');
         let items: any = [];
         for (let i = 0; i < titles.length; i++)
-          items.push({ name: titles[i].innerText, value: texts[i].innerText});
+          items.push({ name: titles[i].innerText, value: texts[i].innerText });
         arrOfDoneTasks[0][index].items.forEach(e => {
           if (e.name.toUpperCase() === 'MOOD') {
             items.push(e);
           }
         });
         let newArrOfDoneTasks = arrOfDoneTasks;
-        newArrOfDoneTasks[0][index].items = items; 
+        newArrOfDoneTasks[0][index].items = items;
 
         fetch('./index.js', {
           method: 'POST',
           headers: {
-              'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
           },
           body: JSON.stringify({
-              type: "EDIT",
-              file: `${newArrOfDoneTasks[0][index].date.day < 10 ? 
-                      `0${newArrOfDoneTasks[0][index].date.day.toString()}` :
-                      newArrOfDoneTasks[0][index].date.day}.${newArrOfDoneTasks[0][index].date.month < 10 ? 
-                      `0${newArrOfDoneTasks[0][index].date.month.toString()}` :
-                      newArrOfDoneTasks[0][index].date.month}.${newArrOfDoneTasks[0][index].date.year}.txt`,// "25.25.2021.txt",
-              index,
-              item:  JSON.stringify(newArrOfDoneTasks[0][index])
-            })
+            type: "EDIT",
+            file: `${newArrOfDoneTasks[0][index].date.day < 10 ?
+              `0${newArrOfDoneTasks[0][index].date.day.toString()}` :
+              newArrOfDoneTasks[0][index].date.day}.${newArrOfDoneTasks[0][index].date.month < 10 ?
+                `0${newArrOfDoneTasks[0][index].date.month.toString()}` :
+                newArrOfDoneTasks[0][index].date.month}.${newArrOfDoneTasks[0][index].date.year}.txt`,// "25.25.2021.txt",
+            index,
+            item: JSON.stringify(newArrOfDoneTasks[0][index])
+          })
         }).then(() => {
-          fetch('./index.js', 
+          fetch('./index.js',
             {
-              headers : { 
+              headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
               }
@@ -150,24 +151,25 @@ const Calendar: React.FC<CalendarProps> = (props) => {
       fetch('./index.js', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify({
-            type: "DELETE",
-            file: `${newArrOfDoneTasks[0][index].date.day < 10 ? 
-                    `0${newArrOfDoneTasks[0][index].date.day.toString()}` :
-                    newArrOfDoneTasks[0][index].date.day}.${newArrOfDoneTasks[0][index].date.month < 10 ? 
-                    `0${newArrOfDoneTasks[0][index].date.month.toString()}` :
-                    newArrOfDoneTasks[0][index].date.month}.${newArrOfDoneTasks[0][index].date.year}.txt`,// "25.25.2021.txt",
-            index,
-            item:  null
-          })
+          type: "DELETE",
+          file: `${newArrOfDoneTasks[0][index].date.day < 10 ?
+            `0${newArrOfDoneTasks[0][index].date.day.toString()}` :
+            newArrOfDoneTasks[0][index].date.day}.${newArrOfDoneTasks[0][index].date.month < 10 ?
+              `0${newArrOfDoneTasks[0][index].date.month.toString()}` :
+              newArrOfDoneTasks[0][index].date.month}.${newArrOfDoneTasks[0][index].date.year}.txt`,// "25.25.2021.txt",
+          index,
+          item: null
+        })
       }).then(() => {
         return newArrOfDoneTasks[0].splice(index, 1);
       }).then(() => {
-        fetch('./index.js', 
+        fetch('./index.js',
           {
-            headers : { 
+            headers: {
               'Content-Type': 'application/json',
               'Accept': 'application/json'
             }
@@ -192,53 +194,53 @@ const Calendar: React.FC<CalendarProps> = (props) => {
           viewComponents.push(
             <>
               <div className="Calendar-cell-info-content-title">
-                { e.name }
+                {e.name}
               </div>
-              <div contentEditable={ true } className="Calendar-cell-info-content-text">
-                { e.value }
+              <div contentEditable={true} className="Calendar-cell-info-content-text">
+                {e.value}
               </div>
             </>
           );
       });
 
-      let deleteButton = <div className="Editor-delete" onClick={ () => { deleteAndExitFromCell(index) } }></div>;
+      let deleteButton = <div className="Editor-delete" onClick={() => { deleteAndExitFromCell(index) }}></div>;
       if (props.viewType !== 0) deleteButton = <></>;
 
       props.setCurrentCell(
         <div className="Calendar-cell-info">
-          <div className="Calendar-cell-info-close" onClick={ () => { saveAndExitFromCell(index, props.viewType) } }></div>
-          <div className="Calendar-cell-info-content">{ viewComponents }</div>
-          { deleteButton }
+          <div className="Calendar-cell-info-close" onClick={() => { saveAndExitFromCell(index, props.viewType) }}></div>
+          <div className="Calendar-cell-info-content">{viewComponents}</div>
+          {deleteButton}
         </div>
       );
     }
 
     arrOfElements.push(
-      <div 
-        className={ classAndMood } 
-        title={ `${outElement.date.day}.${outElement.date.month}.${outElement.date.year} - ` + 
-                `${outElement.toDate.day}.${outElement.toDate.month}.${outElement.toDate.year}` } 
-        key={ index } 
-        onClick={ () => { getCellInfo(index) } }
+      <div
+        className={classAndMood}
+        title={`${outElement.date.day}.${outElement.date.month}.${outElement.date.year} - ` +
+          `${outElement.toDate.day}.${outElement.toDate.month}.${outElement.toDate.year}`}
+        key={index}
+        onClick={() => { getCellInfo(index) }}
       >
-        <p className="Calendar-cell-text">{ outElement.countTasks }</p>
+        <p className="Calendar-cell-text">{outElement.countTasks}</p>
       </div>
-    );    
+    );
   });
 
-  let view = props.viewType === 0 ? props.currentCell ? 
-            <>
-              { props.currentCell }
-            </> : 
-            <>
-              <div className="Calendar">{ arrOfElements }</div>
-              <div className="Editor-add-new"></div>
-            </> : props.currentCell ? props.currentCell : 
-            <>
-              <div className="Calendar">{ arrOfElements }</div>
-            </>;
+  let view = props.viewType === 0 ? props.currentCell ?
+    <>
+      { props.currentCell}
+    </> :
+    <>
+      <div className="Calendar">{arrOfElements}</div>
+      <div className="Editor-add-new"></div>
+    </> : props.currentCell ? props.currentCell :
+      <>
+        <div className="Calendar">{arrOfElements}</div>
+      </>;
 
-  return <>{ view }</>;
+  return <>{view}</>;
 }
 
 export default Calendar;
