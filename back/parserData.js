@@ -7,7 +7,7 @@ module.exports = {
 
         items.reduce((current, next) => {
             const regExp = new RegExp(`(?<=${current}:)[^]*(?=${next}:)`, 'g'); 
-            itemsWithVal.push({ name: current, value: data.match(regExp)[0].replace(/\n/, '').replace(/\n$/, '') });
+            itemsWithVal.push({ name: current, value: data.match(regExp)[0].replace(/\n/, '') });
             return next;
         });
 
@@ -15,5 +15,12 @@ module.exports = {
         itemsWithVal.push({ name: items[items.length - 1], value:  data.match(regExpForLast)[0].replace(/\n/, '') } )
 
         return {items: itemsWithVal, countTasks: [...data.matchAll(/^-/gm)].length };
+    },
+    parseToDate: (data) => {
+        let fileData = '';
+        data.forEach(e => {
+            if (e.name.length !== 0) fileData += `${e.name}:${e.value}\n`
+        })
+        return fileData;
     }
 }
