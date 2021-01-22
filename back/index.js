@@ -10,6 +10,7 @@ const pathToTasks = require('./pathToTasks.json');
 let tasks = [[], [], []]; // days, weeks, months
 
 function updateTasks() {
+    tasks = [[], [], []];
     fs.readdir(pathToTasks, (err, files) => {
         files.forEach(file => {
             const filePath = `${pathToTasks}/${file}`;
@@ -49,7 +50,6 @@ function updateTasks() {
 updateTasks();
 
 fs.watch(pathToTasks, (eventType, filename) => {
-    tasks = [[], [], []];
     updateTasks();
 });
 
