@@ -96,7 +96,7 @@
     .Swticher-text { 
         font-size: 28px;
         height: 28px;
-        background-color: #00021dab;
+        background: linear-gradient(90deg, #00021d, transparent);
     }
     
     .Switcher {

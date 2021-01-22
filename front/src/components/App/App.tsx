@@ -5,12 +5,16 @@ import Switcher from '../Switcher/Switcher';
 
 const App: React.FC = (props) => {
   let [viewType, setViewType] = useState<number>(0);
+  let [currentCell, setCurrentCell] = useState<any>();
+  let switcher = <Switcher setNewViewType={ setViewType } />;
+
+  if (currentCell) switcher = <></>;
 
   return (
     <>
       <h1 className="App-title">{new Date().toDateString()}</h1>
-      <Switcher setNewViewType={ setViewType } />
-      <Calendar viewType={viewType}/>
+      { switcher }
+      <Calendar viewType={viewType} currentCell={currentCell} setCurrentCell={setCurrentCell}/>
     </>
   );
 }
