@@ -61,6 +61,15 @@ app
         if (req.body.type) {
             if (req.body.type === 'EDIT') {
                 tasks[0][req.body.index] = JSON.parse(req.body.item);
+                if (tasks[0][req.body.index].date !== tasks[0][req.body.index].toDate) {
+                    fs.unlinkSync(path.join(pathToTasks, req.body.file));
+                    tasks[0][req.body.index].date = Object.assign({}, tasks[0][req.body.index].toDate);
+                    req.body.file = `${tasks[0][req.body.index].date.day < 10 ?
+                        `0${tasks[0][req.body.index].date.day.toString()}` :
+                        tasks[0][req.body.index].date.day}.${tasks[0][req.body.index].date.month < 10 ?
+                          `0${tasks[0][req.body.index].date.month.toString()}` :
+                          tasks[0][req.body.index].date.month}.${tasks[0][req.body.index].date.year}.txt`
+                }
                 fs.writeFileSync(path.join(pathToTasks, req.body.file), parserData.parseToDate(JSON.parse(req.body.item).items));
             } else if (req.body.type === 'ADD') {
                 tasks[0].push(JSON.parse(req.body.item));
