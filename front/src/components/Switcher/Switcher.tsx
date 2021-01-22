@@ -1,4 +1,3 @@
-import { exec } from 'child_process';
 import React, { useState } from 'react';
 import './Switcher.css';
 

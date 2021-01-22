@@ -12,7 +12,6 @@ const App: React.FC = (props) => {
 
   return (
     <>
-      <h1 className="App-title">{new Date().toDateString()}</h1>
       { switcher }
       <Calendar viewType={viewType} currentCell={currentCell} setCurrentCell={setCurrentCell}/>
     </>
