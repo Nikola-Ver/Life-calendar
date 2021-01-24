@@ -101,6 +101,7 @@
 .Mood-normal,
 .Mood-good,
 .Mood-ideally {
+    user-select: none;
     height: 70px;
     width: 70px;
     background-size: 100%;

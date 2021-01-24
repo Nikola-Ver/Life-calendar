@@ -32,52 +32,28 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   // 0 - days, 1 - weeks, 2 - months
   let [arrOfDoneTasks, setArrOfDoneTasks] = useState<Array<Array<Data>>>([[], [], []]);
 
-  // if (
-  //   flagFirstIn &&
-  //   arrOfDoneTasks[0].length === 0 &&
-  //   arrOfDoneTasks[1].length === 0 &&
-  //   arrOfDoneTasks[2].length === 0
-  // ) {
-  //   flagFirstIn = false;
-  //   fetch('./index.js',
-  //     {
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Accept': 'application/json'
-  //       }
-  //     }
-  //   )
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       setArrOfDoneTasks(data);
-  //     });
-  // }
-
   if (
+    flagFirstIn &&
     arrOfDoneTasks[0].length === 0 &&
     arrOfDoneTasks[1].length === 0 &&
     arrOfDoneTasks[2].length === 0
-  )
-    setArrOfDoneTasks([[
-      { items: [{ name: "Dad", value: "- invited me to fish with his friends and my godfather" }, { name: "I", value: "- repeated JS & Node\n- at 01:15 AM go to bed\n- updated the FileWatcher program\n- started writing a new React project in ts\n- repeated hooks for react\n- took a walk with my friends (Artem & Andrey)\n- tried to install a program for Artem's dad (program to diagnostic audi with VOG wire)\n- went to bed at 09:00 PM\n- at 11:40 PM woke up" }, { name: "Mood", value: " good" }], countTasks: 10, date: { day: 17, month: 1, year: 2021 }, toDate: { day: 17, month: 1, year: 2021 } },
-      { items: [{ name: 'Mood', value: ' awful' }], countTasks: 2, date: { day: 18, month: 1, year: 2021 }, toDate: { day: 18, month: 1, year: 2021 } },
-      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 5, date: { day: 19, month: 1, year: 2021 }, toDate: { day: 19, month: 1, year: 2021 } },
-      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 10, date: { day: 21, month: 1, year: 2021 }, toDate: { day: 21, month: 1, year: 2021 } },
-      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 10, date: { day: 22, month: 1, year: 2021 }, toDate: { day: 22, month: 1, year: 2021 } },
-      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 10, date: { day: 23, month: 1, year: 2021 }, toDate: { day: 23, month: 1, year: 2021 } },
-      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 10, date: { day: 24, month: 1, year: 2021 }, toDate: { day: 24, month: 1, year: 2021 } },
-      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 30, date: { day: 25, month: 1, year: 2021 }, toDate: { day: 25, month: 1, year: 2021 } },
-      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 30, date: { day: 26, month: 1, year: 2021 }, toDate: { day: 26, month: 1, year: 2021 } },
-    ],
-    [
-      { items: [{ name: "Dad", value: "- invited me to fish with his friends and my godfather" }, { name: "I", value: "- repeated JS & Node\n- at 01:15 AM go to bed\n- updated the FileWatcher program\n- started writing a new React project in ts\n- repeated hooks for react\n- took a walk with my friends (Artem & Andrey)\n- tried to install a program for Artem's dad (program to diagnostic audi with VOG wire)\n- went to bed at 09:00 PM\n- at 11:40 PM woke up" }, { name: "Mood", value: " good" }], countTasks: 10, date: { day: 17, month: 1, year: 2021 }, toDate: { day: 24, month: 1, year: 2021 } },
-      { items: [{ name: 'Mood', value: ' awful' }], countTasks: 15, date: { day: 17, month: 1, year: 2021 }, toDate: { day: 24, month: 1, year: 2021 } },
-    ],
-    [
-      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 15, date: { day: 17, month: 1, year: 2021 }, toDate: { day: 17, month: 1, year: 2021 } },
-    ]]);
+  ) {
+    flagFirstIn = false;
+    fetch('./index.js',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        }
+      }
+    )
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setArrOfDoneTasks(data);
+      });
+  }
 
   const arrOfElements: Array<any> = [];
 
@@ -114,6 +90,8 @@ const Calendar: React.FC<CalendarProps> = (props) => {
             mood = currentItem.classList[i].replace(/Mood-/, '');
           }
         }
+        if (items.length > 0 && items[items.length - 1].value[items[items.length - 1].value.length - 1] !== '\n') 
+          items[items.length - 1].value += '\n';
         items.push({name: 'Mood', value: mood});
         let newArrOfDoneTasks = arrOfDoneTasks;
         newArrOfDoneTasks[0][index].items = items;
@@ -244,6 +222,8 @@ const Calendar: React.FC<CalendarProps> = (props) => {
       let date = arrOfDoneTasks[props.viewType][index].date;
       let toDate = arrOfDoneTasks[props.viewType][index].toDate;
       let dateToday = <h1 id="time" className="App-title">{new Date(`${date.month}.${date.day}.${date.year}`).toDateString()}</h1>;
+      if (props.viewType !== 0) 
+        dateToday = <h1 className="App-title">{new Date(`${date.month}.${date.day}.${date.year}`).toDateString()}</h1>
       if (date.month !== toDate.month || date.day !== toDate.day || date.year !== toDate.year) {
         dateToday =
           <h1 className="App-title-two">
