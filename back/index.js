@@ -36,10 +36,10 @@ function updateTasks(flag) {
         });
         tasks[0].sort((current, next) => (
             Number.parseInt(current.date.year.toString() + (current.date.month.toString().length < 2 ?
-                `0${current.date.month.toString()}` : current.date.month.toString()) + (current.date.day.toString() < 2 ?
+                `0${current.date.month.toString()}` : current.date.month.toString()) + (current.date.day.toString().length < 2 ?
                     `0${current.date.day.toString()}` : current.date.day.toString())) -
             Number.parseInt(next.date.year.toString() + (next.date.month.toString().length < 2 ?
-                `0${next.date.month.toString()}` : next.date.month.toString()) + (next.date.day.toString() < 2 ?
+                `0${next.date.month.toString()}` : next.date.month.toString()) + (next.date.day.toString().length < 2 ?
                     `0${next.date.day.toString()}` : next.date.day.toString()))
         ));
         tasks[1] = parserDate.getWeeksFromDays(JSON.stringify(tasks[0]));
@@ -72,8 +72,11 @@ app
                 }
                 fs.writeFileSync(path.join(pathToTasks, req.body.file), parserData.parseToDate(JSON.parse(req.body.item).items));
             } else if (req.body.type === 'ADD') {
-                tasks[0].push(JSON.parse(req.body.item));
-                fs.writeFileSync(path.join(pathToTasks, req.body.file), parserData.parseToDate(JSON.parse(req.body.item.items).items));
+                let day = new Date();
+                while (fs.existsSync(path.join(pathToTasks, parserDate.dateToFileName(day)))) {
+                    day.setDate(day.getDate() + 1);
+                }
+                fs.writeFileSync(path.join(pathToTasks, parserDate.dateToFileName(day)), '');
             } else if (req.body.type === 'DELETE') {
                 tasks[0].splice(req.body.index, 1);
                 fs.unlinkSync(path.join(pathToTasks, req.body.file));

@@ -4,17 +4,21 @@ module.exports = {
             return e[0].replace(':', '').trim();
         });
         const itemsWithVal = [];
+        let countTasks = 0;
 
-        items.reduce((current, next) => {
-            const regExp = new RegExp(`(?<=${current}:)[^]*(?=${next}:)`, 'g');
-            itemsWithVal.push({ name: current, value: data.match(regExp)[0] });
-            return next;
-        });
+        if (items.length > 0) {
+            items.reduce((current, next) => {
+                const regExp = new RegExp(`(?<=${current}:)[^]*(?=${next}:)`, 'g');
+                itemsWithVal.push({ name: current, value: data.match(regExp)[0] });
+                return next;
+            });
 
-        const regExpForLast = new RegExp(`(?<=${items[items.length - 1]}:)[^]*`, 'g');
-        itemsWithVal.push({ name: items[items.length - 1], value: data.match(regExpForLast)[0] })
+            const regExpForLast = new RegExp(`(?<=${items[items.length - 1]}:)[^]*`, 'g');
+            itemsWithVal.push({ name: items[items.length - 1], value: data.match(regExpForLast)[0] });
+            countTasks = [...data.matchAll(/^-/gm)].length;
+        } 
 
-        return { items: itemsWithVal, countTasks: [...data.matchAll(/^-/gm)].length };
+        return { items: itemsWithVal, countTasks };
     },
     parseToDate: (data) => {
         let fileData = '';

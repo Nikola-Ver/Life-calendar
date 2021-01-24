@@ -1,0 +1,61 @@
+.Cell-tuning-fields {
+    display: flex;
+    flex-direction: column;
+    width: 70vw;
+    margin: auto;
+}
+
+.Cell-tuning-fields-title {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 36px;
+    color: white;
+    text-align: center;
+    outline: none;
+    background: transparent;
+    border: none;
+}
+
+.Cell-tuning-fields-text {
+    color: var(--not-hover-color);
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: white;
+    outline: none;
+    background: transparent;
+    border: none;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: calc(100% - 40px);
+    resize: none;
+}
+
+.Cell-tuning-fields-text::placeholder {
+    text-align: center;
+}
+
+.Cell-tuning-fields-button {
+    user-select: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    background: linear-gradient(transparent, transparent);
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    margin: auto;
+    margin-top: 20px;
+    cursor: pointer;
+    width: 130px;
+    height: 35px;
+    border-radius: 20px;
+    border: 2px solid white;
+    transition: 0.2s;
+}
+
+.Cell-tuning-fields-button:hover {
+    color: black;
+    background: white;
+    width: 180px;
+}

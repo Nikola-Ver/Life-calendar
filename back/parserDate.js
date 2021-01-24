@@ -175,5 +175,12 @@ module.exports = {
         });
 
         return newArr;
+    },
+    dateToFileName: (date) => {
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+        return `${day < 10 ? '0' + day.toString() : day.toString()}.${
+            month < 10 ? '0' + month.toString() : month.toString()}.${year.toString()}.txt`
     }
 }

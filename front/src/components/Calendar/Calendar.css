@@ -1,5 +1,3 @@
-@import '../Editor/Editor.css';
-
 .Calendar {
     border-top: 2px solid white;
     border-bottom: 2px solid white;
@@ -145,19 +143,55 @@
     transform: rotate(90deg);
 }
 
-.Calendar-cell-info-content-element {
-    position: relative;
+.Editor-delete,
+.Editor-add-new {
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.2s background-color, 0.2s width, 0.2s height;
+    box-shadow: inset 0 0 3px 0 black;
+    background: url('../../img/add.png') no-repeat;
+    background-color: var(--not-hover-color);
+    background-size: 75%;
+    background-position: 65%;
 }
 
-.Calendar-cell-info-content-element-remove {
-    position: absolute;
-    width: 50px;
-    height: 50px; 
-    top: -7px;
-    left: 0;
+.Editor-delete {
+    background: url('../../img/delete.png') no-repeat;
+    background-color: var(--not-hover-color);    
+    background-size: 65%;
+    background-position: center;
+}
+
+.Editor-delete:hover,
+.Editor-add-new:hover {
+    background-color: var(--hover-color);
 }
 
 @media screen and (max-width: 615px) {
+    .Editor-delete {
+        position: absolute;
+        bottom: auto;
+        top: -73px; 
+        left: 0;
+        background-color: transparent;
+        filter: invert(1);
+        box-shadow: none;
+    }
+
+    .Editor-add-new {
+        bottom: auto;
+        top: 12px;
+        right: 5px;
+        background-color: transparent;
+        filter: invert(1);
+        box-shadow: none;
+    }
+
     .Calendar-cell-info-content-title {
         font-size: 32px;
     }
@@ -187,4 +221,16 @@
         width: 55px;
         height: 55px;
     }
+}
+
+.Calendar-cell-info-content-element {
+    position: relative;
+}
+
+.Calendar-cell-info-content-element-remove {
+    position: absolute;
+    width: 50px;
+    height: 50px; 
+    top: -7px;
+    left: 0;
 }

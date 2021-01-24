@@ -1,5 +1,5 @@
 import './Calendar.css';
-import Editor from '../Editor/Editor';
+import Tuning from '../Tuning/Tuning';
 import { useState } from 'react';
 
 interface CalendarProps {
@@ -56,28 +56,28 @@ const Calendar: React.FC<CalendarProps> = (props) => {
   // }
 
   if (
-    arrOfDoneTasks[0].length === 0 && 
-    arrOfDoneTasks[1].length === 0 && 
+    arrOfDoneTasks[0].length === 0 &&
+    arrOfDoneTasks[1].length === 0 &&
     arrOfDoneTasks[2].length === 0
-  ) 
-  setArrOfDoneTasks([[
-      { items: [{name: "Dad",value: "- invited me to fish with his friends and my godfather"},{name: "I",value: "- repeated JS & Node\n- at 01:15 AM go to bed\n- updated the FileWatcher program\n- started writing a new React project in ts\n- repeated hooks for react\n- took a walk with my friends (Artem & Andrey)\n- tried to install a program for Artem's dad (program to diagnostic audi with VOG wire)\n- went to bed at 09:00 PM\n- at 11:40 PM woke up"},{name: "Mood",value: " good"}],countTasks: 10,date: {day: 17, month: 1, year: 2021}, toDate: {day: 17, month: 1, year: 2021} },
-      { items: [{name: 'Mood', value: ' awful'}], countTasks: 2, date: {day: 18, month: 1, year: 2021}, toDate: {day: 18, month: 1, year: 2021}},
-      { items: [{name: 'Mood', value: ' ideally'}], countTasks: 5, date: {day: 19, month: 1, year: 2021}, toDate: {day: 19, month: 1, year: 2021}},
-      { items: [{name: 'Mood', value: ' ideally'}], countTasks: 10, date: {day: 21, month: 1, year: 2021}, toDate: {day: 21, month: 1, year: 2021}},
-      { items: [{name: 'Mood', value: ' ideally'}], countTasks: 10, date: {day: 22, month: 1, year: 2021}, toDate: {day: 22, month: 1, year: 2021}},
-      { items: [{name: 'Mood', value: ' ideally'}], countTasks: 10, date: {day: 23, month: 1, year: 2021}, toDate: {day: 23, month: 1, year: 2021}},
-      { items: [{name: 'Mood', value: ' ideally'}], countTasks: 10, date: {day: 24, month: 1, year: 2021}, toDate: {day: 24, month: 1, year: 2021}},
-      { items: [{name: 'Mood', value: ' ideally'}], countTasks: 30, date: {day: 25, month: 1, year: 2021}, toDate: {day: 25, month: 1, year: 2021}},
-      { items: [{name: 'Mood', value: ' ideally'}], countTasks: 30, date: {day: 26, month: 1, year: 2021}, toDate: {day: 26, month: 1, year: 2021}},
-  ],
-  [
-      { items: [{name: "Dad",value: "- invited me to fish with his friends and my godfather"},{name: "I",value: "- repeated JS & Node\n- at 01:15 AM go to bed\n- updated the FileWatcher program\n- started writing a new React project in ts\n- repeated hooks for react\n- took a walk with my friends (Artem & Andrey)\n- tried to install a program for Artem's dad (program to diagnostic audi with VOG wire)\n- went to bed at 09:00 PM\n- at 11:40 PM woke up"},{name: "Mood",value: " good"}],countTasks: 10,date: {day: 17, month: 1, year: 2021}, toDate: {day: 24, month: 1, year: 2021} },
-      { items: [{name: 'Mood', value: ' awful'}], countTasks: 15, date: {day: 17, month: 1, year: 2021}, toDate: {day: 24, month: 1, year: 2021}},
-  ],
-  [
-      { items: [{name: 'Mood', value: ' ideally'}], countTasks: 15, date: {day: 17, month: 1, year: 2021}, toDate: {day: 17, month: 1, year: 2021}},
-  ]]);
+  )
+    setArrOfDoneTasks([[
+      { items: [{ name: "Dad", value: "- invited me to fish with his friends and my godfather" }, { name: "I", value: "- repeated JS & Node\n- at 01:15 AM go to bed\n- updated the FileWatcher program\n- started writing a new React project in ts\n- repeated hooks for react\n- took a walk with my friends (Artem & Andrey)\n- tried to install a program for Artem's dad (program to diagnostic audi with VOG wire)\n- went to bed at 09:00 PM\n- at 11:40 PM woke up" }, { name: "Mood", value: " good" }], countTasks: 10, date: { day: 17, month: 1, year: 2021 }, toDate: { day: 17, month: 1, year: 2021 } },
+      { items: [{ name: 'Mood', value: ' awful' }], countTasks: 2, date: { day: 18, month: 1, year: 2021 }, toDate: { day: 18, month: 1, year: 2021 } },
+      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 5, date: { day: 19, month: 1, year: 2021 }, toDate: { day: 19, month: 1, year: 2021 } },
+      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 10, date: { day: 21, month: 1, year: 2021 }, toDate: { day: 21, month: 1, year: 2021 } },
+      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 10, date: { day: 22, month: 1, year: 2021 }, toDate: { day: 22, month: 1, year: 2021 } },
+      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 10, date: { day: 23, month: 1, year: 2021 }, toDate: { day: 23, month: 1, year: 2021 } },
+      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 10, date: { day: 24, month: 1, year: 2021 }, toDate: { day: 24, month: 1, year: 2021 } },
+      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 30, date: { day: 25, month: 1, year: 2021 }, toDate: { day: 25, month: 1, year: 2021 } },
+      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 30, date: { day: 26, month: 1, year: 2021 }, toDate: { day: 26, month: 1, year: 2021 } },
+    ],
+    [
+      { items: [{ name: "Dad", value: "- invited me to fish with his friends and my godfather" }, { name: "I", value: "- repeated JS & Node\n- at 01:15 AM go to bed\n- updated the FileWatcher program\n- started writing a new React project in ts\n- repeated hooks for react\n- took a walk with my friends (Artem & Andrey)\n- tried to install a program for Artem's dad (program to diagnostic audi with VOG wire)\n- went to bed at 09:00 PM\n- at 11:40 PM woke up" }, { name: "Mood", value: " good" }], countTasks: 10, date: { day: 17, month: 1, year: 2021 }, toDate: { day: 24, month: 1, year: 2021 } },
+      { items: [{ name: 'Mood', value: ' awful' }], countTasks: 15, date: { day: 17, month: 1, year: 2021 }, toDate: { day: 24, month: 1, year: 2021 } },
+    ],
+    [
+      { items: [{ name: 'Mood', value: ' ideally' }], countTasks: 15, date: { day: 17, month: 1, year: 2021 }, toDate: { day: 17, month: 1, year: 2021 } },
+    ]]);
 
   const arrOfElements: Array<any> = [];
 
@@ -204,21 +204,25 @@ const Calendar: React.FC<CalendarProps> = (props) => {
       let viewComponents: any = [];
       let contentTitle = 'Calendar-cell-info-content-title';
       let contentText = 'Calendar-cell-info-content-text Editable';
-      let deleteContentElementButton = 
-        <div 
-          onClick={ (e: any) => { e.target.parentElement.remove() } } 
+      let deleteButton = <div className="Editor-delete" onClick={() => { deleteAndExitFromCell(index) }}></div>;
+      let tuning = <Tuning setArrOfDoneTasks={setArrOfDoneTasks} arrOfDoneTasks={arrOfDoneTasks} index={index}/>;
+      let deleteContentElementButton =
+        <div
+          onClick={(e: any) => { e.target.parentElement.remove() }}
           className="Editor-delete Calendar-cell-info-content-element-remove">
         </div>;
       if (props.viewType === 0) {
         contentTitle += ' Editable';
       } else {
         deleteContentElementButton = <></>;
+        deleteButton = <></>;
+        tuning = <></>;
       }
       arrOfDoneTasks[props.viewType][index].items.forEach(e => {
         if (e.name.toUpperCase() !== 'MOOD')
           viewComponents.push(
             <div className="Calendar-cell-info-content-element">
-              { deleteContentElementButton }
+              {deleteContentElementButton}
               <div className={contentTitle}>
                 {e.name}
               </div>
@@ -229,26 +233,27 @@ const Calendar: React.FC<CalendarProps> = (props) => {
           );
       });
 
-      let deleteButton = <div className="Editor-delete" onClick={() => { deleteAndExitFromCell(index) }}></div>;
-      if (props.viewType !== 0) deleteButton = <></>;
 
       let date = arrOfDoneTasks[props.viewType][index].date;
       let toDate = arrOfDoneTasks[props.viewType][index].toDate;
       let dateToday = <h1 id="time" className="App-title">{new Date(`${date.month}.${date.day}.${date.year}`).toDateString()}</h1>;
       if (date.month !== toDate.month || date.day !== toDate.day || date.year !== toDate.year) {
-        dateToday = 
+        dateToday =
           <h1 className="App-title-two">
             {new Date(`${date.month}.${date.day}.${date.year}`).toDateString()}<br />
             {new Date(`${toDate.month}.${toDate.day}.${toDate.year}`).toDateString()}
           </h1>;
       }
-      
+
       props.setCurrentCell(
         <>
-          { dateToday }
+          {dateToday}
           <div className="Calendar-cell-info">
             <div className="Calendar-cell-info-close" onClick={() => { saveAndExitFromCell(index, props.viewType) }}></div>
-            <div className="Calendar-cell-info-content">{viewComponents}</div>
+            <div className="Calendar-cell-info-content">
+              {viewComponents}
+              {tuning}
+            </div>
             {deleteButton}
           </div>
         </>
@@ -275,12 +280,40 @@ const Calendar: React.FC<CalendarProps> = (props) => {
     <>
       <h1 className="App-title">{new Date().toDateString()}</h1>
       <div className="Calendar">{arrOfElements}</div>
-      <div className="Editor-add-new"></div>
+      <div className="Editor-add-new" onClick={() => { addNewCell() }}></div>
     </> : props.currentCell ? props.currentCell :
       <>
         <h1 className="App-title">{new Date().toDateString()}</h1>
         <div className="Calendar">{arrOfElements}</div>
       </>;
+
+  function addNewCell(): void {
+    fetch('./index.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        type: "ADD"
+      })
+    }).then(() => {
+      fetch('./index.js',
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          setArrOfDoneTasks(data);
+        });
+    });
+  }
 
   return <>{view}</>;
 }
