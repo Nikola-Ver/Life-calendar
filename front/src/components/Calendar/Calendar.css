@@ -107,7 +107,8 @@
 .Calendar-cell-info-content-title {
     color: var(--not-hover-color);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    width: fit-content;
+    text-align: center;
+    width: 100%;
     margin: auto;
     font-size: 36px;
     outline: none;
@@ -116,12 +117,12 @@
 .Calendar-cell-info-content-text {
     color: var(--not-hover-color);
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    width: fit-content;
     font-size: 28px;
     font-weight: 300;
     margin-bottom: 30px;
     margin-left: 20px;
     margin-right: 20px;
+    width: calc(100% - 40px);
     outline: none;
 }
 
@@ -142,6 +143,18 @@
 .Calendar-cell-info-close:hover {
     background: var(--hover-color);
     transform: rotate(90deg);
+}
+
+.Calendar-cell-info-content-element {
+    position: relative;
+}
+
+.Calendar-cell-info-content-element-remove {
+    position: absolute;
+    width: 50px;
+    height: 50px; 
+    top: -7px;
+    left: 0;
 }
 
 @media screen and (max-width: 615px) {
