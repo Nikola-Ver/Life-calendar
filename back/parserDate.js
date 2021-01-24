@@ -1,7 +1,3 @@
-function getDayOfWeek(date) {
-    return Number.parseFloat((new Date(`${date.month}.${date.day}.${date.year}`)).getDay());
-}
-
 function getWeekNumber(d) {
     d = new Date(`${d.month}.${d.day}.${d.year}`);
     d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
@@ -33,15 +29,16 @@ module.exports = {
         let newArr = [];
         let moodVal = 0;
         let ordNumWeek;
+        let count = 1;
 
         arr.forEach(element => {
             let currentYearWeek = getWeekNumber(element.date);
-            if (getDayOfWeek(element.date) === 0 || newArr.length === 0 ||
-                (ordNumWeek[0] !== currentYearWeek[0]) || (ordNumWeek[1] !== currentYearWeek[1])) {
+            count++;
+            if (newArr.length === 0 || (ordNumWeek[0] !== currentYearWeek[0]) ||
+                (ordNumWeek[1] !== currentYearWeek[1])) {
                 if (newArr.length > 0 && ((ordNumWeek[0] !== currentYearWeek[0]) ||
                     (ordNumWeek[1] !== currentYearWeek[1]))) {
-                    const currentMoodVal = moodVal / (getDayOfWeek(newArr[newArr.length - 1].toDate) -
-                        getDayOfWeek(newArr[newArr.length - 1].date) + 1);
+                    const currentMoodVal = moodVal / (count - 1);
                     const currentMood = moodFromNumToStr(currentMoodVal);
 
                     let flagSetMood = false;
@@ -56,6 +53,7 @@ module.exports = {
                     if (!flagSetMood) newArr[newArr.length - 1].items.push({ name: 'Mood', value: currentMood });
                 }
                 moodVal = 0;
+                count = 1;
                 ordNumWeek = getWeekNumber(element.date);
                 newArr.push(element);
                 element.items.forEach(e => {
@@ -84,8 +82,7 @@ module.exports = {
             }
 
             if (element === arr[arr.length - 1]) {
-                const currentMoodVal = moodVal / (getDayOfWeek(newArr[newArr.length - 1].toDate) -
-                    getDayOfWeek(newArr[newArr.length - 1].date) + 1);
+                const currentMoodVal = moodVal / count;
                 const currentMood = moodFromNumToStr(currentMoodVal);
 
                 let flagSetMood = false;
@@ -109,14 +106,14 @@ module.exports = {
         let moodVal = 0;
         let currentYear;
         let currentMonth;
+        let count = 1;
 
         arr.forEach(element => {
-            if (getDayOfWeek(element.date) === 0 || newArr.length === 0 ||
-                currentMonth !== element.date.month || currentYear !== element.date.year) {
+            count++;
+            if (newArr.length === 0 || currentMonth !== element.date.month || currentYear !== element.date.year) {
                 if (newArr.length > 0 && (currentMonth !== element.date.month ||
                     currentYear !== element.date.year)) {
-                    const currentMoodVal = moodVal / (getDayOfWeek(newArr[newArr.length - 1].toDate) -
-                        getDayOfWeek(newArr[newArr.length - 1].date) + 1);
+                    const currentMoodVal = moodVal / (count - 1);
                     const currentMood = moodFromNumToStr(currentMoodVal);
 
                     let flagSetMood = false;
@@ -131,6 +128,7 @@ module.exports = {
                     if (!flagSetMood) newArr[newArr.length - 1].items.push({ name: 'Mood', value: currentMood });
                 }
                 moodVal = 0;
+                count = 1;
                 currentMonth = element.date.month;
                 currentYear = element.date.year;
                 newArr.push(element);
@@ -160,8 +158,7 @@ module.exports = {
             }
 
             if (element === arr[arr.length - 1]) {
-                const currentMoodVal = moodVal / (getDayOfWeek(newArr[newArr.length - 1].toDate) -
-                    getDayOfWeek(newArr[newArr.length - 1].date) + 1);
+                const currentMoodVal = moodVal / count;
                 const currentMood = moodFromNumToStr(currentMoodVal);
 
                 let flagSetMood = false;
