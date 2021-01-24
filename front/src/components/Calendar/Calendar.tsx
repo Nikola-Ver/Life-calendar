@@ -103,11 +103,18 @@ const Calendar: React.FC<CalendarProps> = (props) => {
         let items: any = [];
         for (let i = 0; i < titles.length; i++)
           items.push({ name: titles[i].innerText, value: texts[i].innerText });
-        arrOfDoneTasks[0][index].items.forEach(e => {
-          if (e.name.toUpperCase() === 'MOOD') {
-            items.push(e);
+        let moodDivs = document.getElementsByClassName('mood');
+        let currentItem: any;
+        let mood = 'normal';
+        for (let i = 0; i < moodDivs.length; i++) {
+          if (moodDivs[i].classList.contains('active')) currentItem = moodDivs[i];
+        }
+        for (let i = 0; i < currentItem.classList.length; i++) {
+          if (/Mood-/.exec(currentItem.classList[i])) {
+            mood = currentItem.classList[i].replace(/Mood-/, '');
           }
-        });
+        }
+        items.push({name: 'Mood', value: mood});
         let newArrOfDoneTasks = arrOfDoneTasks;
         newArrOfDoneTasks[0][index].items = items;
         const timeDiv = document.getElementById('time');

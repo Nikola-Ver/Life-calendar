@@ -104,9 +104,10 @@
 
 .Calendar-cell-info-content-title {
     color: var(--not-hover-color);
+    word-wrap: break-word;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     text-align: center;
-    width: 100%;
+    width: calc(100% - 120px);
     margin: auto;
     font-size: 36px;
     outline: none;
@@ -114,6 +115,7 @@
 
 .Calendar-cell-info-content-text {
     color: var(--not-hover-color);
+    word-wrap: break-word;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 28px;
     font-weight: 300;
