@@ -15,7 +15,7 @@ module.exports = {
 
             const regExpForLast = new RegExp(`(?<=${items[items.length - 1]}:)[^]*`, 'g');
             itemsWithVal.push({ name: items[items.length - 1], value: data.match(regExpForLast)[0] });
-            countTasks = [...data.matchAll(/^-/gm)].length;
+            countTasks = data.match(/^-/gm).length;
         } 
 
         return { items: itemsWithVal, countTasks };

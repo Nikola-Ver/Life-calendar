@@ -78,7 +78,8 @@ const Calendar: React.FC<CalendarProps> = (props) => {
         const texts: any = calendar.getElementsByClassName('Calendar-cell-info-content-text');
         let items: any = [];
         for (let i = 0; i < titles.length; i++)
-          items.push({ name: titles[i].innerText, value: texts[i].innerText });
+          items.push({ name: titles[i].innerText, value: texts[i].innerText[0] !== '\n' ? 
+                       '\n' + texts[i].innerText : texts[i].innerText });
         let moodDivs = document.getElementsByClassName('mood');
         let currentItem: any;
         let mood = 'normal';
@@ -90,8 +91,11 @@ const Calendar: React.FC<CalendarProps> = (props) => {
             mood = currentItem.classList[i].replace(/Mood-/, '');
           }
         }
-        if (items.length > 0 && items[items.length - 1].value[items[items.length - 1].value.length - 1] !== '\n') 
+        if (items.length > 0 && 
+            items[items.length - 1].value[items[items.length - 1].value.length - 1] !== '\n' &&
+            items[items.length - 1].name.toUpperCase() !== 'Mood') 
           items[items.length - 1].value += '\n';
+        
         items.push({name: 'Mood', value: mood});
         let newArrOfDoneTasks = arrOfDoneTasks;
         newArrOfDoneTasks[0][index].items = items;
