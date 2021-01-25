@@ -1,0 +1,2 @@
+node getAddress.js
+pause
