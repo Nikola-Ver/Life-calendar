@@ -74,7 +74,7 @@ const Tuning: React.FC<TuningProps> = (props) => {
         <div className="Cell-tuning">
             <div className="Cell-tuning-fields">
                 <TextareaAutosize className="Cell-tuning-fields-title" placeholder="Title"/>
-                <TextareaAutosize className="Cell-tuning-fields-text" placeholder="Done tasks"/>
+                <TextareaAutosize className="Cell-tuning-fields-text" placeholder="Completed tasks"/>
                 <div className="Cell-tuning-fields-button" onClick={ () => { addNewTasks() } }>Add new</div>
             </div>
             <div className="Cell-tuning-mood">
