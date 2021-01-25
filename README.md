@@ -33,3 +33,7 @@
 <p align="center">
 <img src="readme\img\view.gif" width="350" />
 </p>
+
+<h2>Installation</h2>
+
+> You need Node.js to run the program. After installing Node.js, all you have to do is run the 'start' ('start.bat') file. To open the program you need the local address of your computer, to do this open the get-address folder and paste 'get-address' ('get-address.bat'). Then go to the address. To install the autostart program, put it to the address' C:\Program Files', press the key combination 'Win + R' and enter 'shell:startup' there, then move the file 'Life-calendar' ('Life-calendar.vbs'). Before starting the program, specify the path to your tasks in 'pathToTasks' ('pathToTasks.json').
