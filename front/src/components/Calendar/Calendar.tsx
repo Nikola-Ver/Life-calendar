@@ -78,8 +78,10 @@ const Calendar: React.FC<CalendarProps> = (props) => {
         const texts: any = calendar.getElementsByClassName('Calendar-cell-info-content-text');
         let items: any = [];
         for (let i = 0; i < titles.length; i++)
-          items.push({ name: titles[i].innerText, value: texts[i].innerText[0] !== '\n' ? 
-                       '\n' + texts[i].innerText : texts[i].innerText });
+          items.push({
+            name: titles[i].innerText, value: texts[i].innerText[0] !== '\n' ?
+              '\n' + texts[i].innerText : texts[i].innerText
+          });
         let moodDivs = document.getElementsByClassName('mood');
         let currentItem: any;
         let mood = 'normal';
@@ -91,12 +93,12 @@ const Calendar: React.FC<CalendarProps> = (props) => {
             mood = currentItem.classList[i].replace(/Mood-/, '');
           }
         }
-        if (items.length > 0 && 
-            items[items.length - 1].value[items[items.length - 1].value.length - 1] !== '\n' &&
-            items[items.length - 1].name.toUpperCase() !== 'Mood') 
+        if (items.length > 0 &&
+          items[items.length - 1].value[items[items.length - 1].value.length - 1] !== '\n' &&
+          items[items.length - 1].name.toUpperCase() !== 'Mood')
           items[items.length - 1].value += '\n';
-        
-        items.push({name: 'Mood', value: mood});
+
+        items.push({ name: 'Mood', value: mood });
         let newArrOfDoneTasks = arrOfDoneTasks;
         newArrOfDoneTasks[0][index].items = items;
         const timeDiv = document.getElementById('time');
@@ -194,7 +196,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
       let contentTitle = 'Calendar-cell-info-content-title';
       let contentText = 'Calendar-cell-info-content-text Editable';
       let deleteButton = <div className="Editor-delete" onClick={() => { deleteAndExitFromCell(index) }}></div>;
-      let tuning = <Tuning setArrOfDoneTasks={setArrOfDoneTasks} arrOfDoneTasks={arrOfDoneTasks} index={index}/>;
+      let tuning = <Tuning setArrOfDoneTasks={setArrOfDoneTasks} arrOfDoneTasks={arrOfDoneTasks} index={index} />;
       let deleteContentElementButton =
         <div
           onClick={(e: any) => { e.target.parentElement.remove() }}
@@ -226,7 +228,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
       let date = arrOfDoneTasks[props.viewType][index].date;
       let toDate = arrOfDoneTasks[props.viewType][index].toDate;
       let dateToday = <h1 id="time" className="App-title">{new Date(`${date.month}.${date.day}.${date.year}`).toDateString()}</h1>;
-      if (props.viewType !== 0) 
+      if (props.viewType !== 0)
         dateToday = <h1 className="App-title">{new Date(`${date.month}.${date.day}.${date.year}`).toDateString()}</h1>
       if (date.month !== toDate.month || date.day !== toDate.day || date.year !== toDate.year) {
         dateToday =
@@ -251,6 +253,31 @@ const Calendar: React.FC<CalendarProps> = (props) => {
       );
     }
 
+    let dateDiv = <></>;
+    if (outElement.date.day === outElement.toDate.day &&
+      outElement.date.month === outElement.toDate.month &&
+      outElement.date.year === outElement.toDate.year) {
+      dateDiv = <p className="Calendar-cell-text date">{
+        `${outElement.date.day < 10 ? '0' + outElement.date.day.toString() :
+          outElement.date.day.toString()}.${outElement.date.month < 10 ? '0' +
+            outElement.date.month.toString() : outElement.date.month.toString()}.${outElement.date.year.toString().slice(2,4)}`}
+      </p>;
+    } else {
+      dateDiv = (
+        <>
+          <p className="Calendar-cell-text date">{
+            `${outElement.date.day < 10 ? '0' + outElement.date.day.toString() :
+              outElement.date.day.toString()}.${outElement.date.month < 10 ? '0' +
+                outElement.date.month.toString() : outElement.date.month.toString()}.${outElement.date.year.toString().slice(2,4)}`}
+          </p>
+          <p className="Calendar-cell-text date">{
+            `${outElement.toDate.day < 10 ? '0' + outElement.toDate.day.toString() :
+              outElement.toDate.day.toString()}.${outElement.toDate.month < 10 ? '0' +
+                outElement.toDate.month.toString() : outElement.toDate.month.toString()}.${outElement.toDate.year.toString().slice(2,4)}`}
+          </p>
+        </>);
+    }
+
     arrOfElements.push(
       <div
         className={classAndMood}
@@ -260,6 +287,7 @@ const Calendar: React.FC<CalendarProps> = (props) => {
         onClick={() => { getCellInfo(index) }}
       >
         <p className="Calendar-cell-text">{outElement.countTasks}</p>
+        {dateDiv}
       </div>
     );
   });
