@@ -225,6 +225,7 @@
     }
 
     .Calendar-cell-text.date {
+        width: 50px;
         font-size: 11px;
     }
 
