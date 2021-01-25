@@ -230,6 +230,9 @@
 }
 
 .Calendar-cell-info-content-element-remove {
+    filter: invert(1);
+    box-shadow: none;
+    background-color: transparent;
     position: absolute;
     width: 50px;
     height: 50px; 
