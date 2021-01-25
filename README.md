@@ -5,25 +5,25 @@
 <h3>You can see the progress of completed tasks, your mood on that day and date</h3>
 
 <p align="center">
-<img src="readme\img\main.png" width="350" />
+<img src="readme\img\main.png" width="500" />
 </p>
 
 <h3>You can add a new day using the button</h3>
 
 <p align="center">
-<img src="readme\img\add.gif" width="350" />
+<img src="readme\img\add.gif" width="500" />
 </p>
 
 <h3>You can record completed tasks and indicate your mood</h3>
 
 <p align="center">
-<img src="readme\img\tasks.gif" width="450" />
+<img src="readme\img\tasks.gif" width="500" />
 </p>
 
 <h3>You can change the mood of the task or delete them</h3>
 
 <p align="center">
-<img src="readme\img\edit.gif" width="350" />
+<img src="readme\img\edit.gif" width="500" />
 </p>
 
 > Also you can delete the day
@@ -31,7 +31,7 @@
 <h3>You can view progress by day, week and month for a visual picture</h3>
 
 <p align="center">
-<img src="readme\img\view.gif" width="350" />
+<img src="readme\img\view.gif" width="500" />
 </p>
 
 <h2>Installation</h2>
