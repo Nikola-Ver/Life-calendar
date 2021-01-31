@@ -57,37 +57,41 @@ app
         res.end(JSON.stringify(tasks));
     })
 
-    .post("*", async (req, res) => {
-        if (req.body.type) {
-            if (req.body.type === 'EDIT') {
-                tasks[0][req.body.index] = JSON.parse(req.body.item);
-                if (tasks[0][req.body.index].date !== tasks[0][req.body.index].toDate) {
-                    fs.unlinkSync(path.join(pathToTasks, req.body.file));
-                    tasks[0][req.body.index].date = Object.assign({}, tasks[0][req.body.index].toDate);
-                    req.body.file = `${tasks[0][req.body.index].date.day < 10 ?
-                        `0${tasks[0][req.body.index].date.day.toString()}` :
-                        tasks[0][req.body.index].date.day}.${tasks[0][req.body.index].date.month < 10 ?
-                          `0${tasks[0][req.body.index].date.month.toString()}` :
-                          tasks[0][req.body.index].date.month}.${tasks[0][req.body.index].date.year}.txt`
-                }
-                fs.writeFileSync(path.join(pathToTasks, req.body.file), parserData.parseToDate(JSON.parse(req.body.item).items));
-            } else if (req.body.type === 'ADD') {
-                let day = new Date();
-                while (fs.existsSync(path.join(pathToTasks, parserDate.dateToFileName(day)))) {
-                    day.setDate(day.getDate() + 1);
-                }
-                fs.writeFileSync(path.join(pathToTasks, parserDate.dateToFileName(day)), '');
-            } else if (req.body.type === 'DELETE') {
-                tasks[0].splice(req.body.index, 1);
-                fs.unlinkSync(path.join(pathToTasks, req.body.file));
-            }
-
-            updateTasks();
-            res.setHeader('Content-Type', 'application/json');
-            res.end();
-        } else {
-            res.status(400).send("Bad request");
+    .put("*", async(req, res) => {
+        let day = new Date();
+        while (fs.existsSync(path.join(pathToTasks, parserDate.dateToFileName(day)))) {
+            day.setDate(day.getDate() + 1);
         }
+        fs.writeFileSync(path.join(pathToTasks, parserDate.dateToFileName(day)), '');
+        updateTasks();
+        res.setHeader('Content-Type', 'application/json');
+        res.end();
+    })
+
+    .delete("*", async(req, res) => {
+        tasks[0].splice(req.body.index, 1);
+        fs.unlinkSync(path.join(pathToTasks, req.body.file));
+        updateTasks();
+        res.setHeader('Content-Type', 'application/json');
+        res.end();
+    })
+
+    .post("*", async (req, res) => {
+        tasks[0][req.body.index] = JSON.parse(req.body.item);
+        if (tasks[0][req.body.index].date !== tasks[0][req.body.index].toDate) {
+            fs.unlinkSync(path.join(pathToTasks, req.body.file));
+            tasks[0][req.body.index].date = Object.assign({}, tasks[0][req.body.index].toDate);
+            req.body.file = `${tasks[0][req.body.index].date.day < 10 ?
+                `0${tasks[0][req.body.index].date.day.toString()}` :
+                tasks[0][req.body.index].date.day}.${tasks[0][req.body.index].date.month < 10 ?
+                    `0${tasks[0][req.body.index].date.month.toString()}` :
+                    tasks[0][req.body.index].date.month}.${tasks[0][req.body.index].date.year}.txt`
+        }
+        fs.writeFileSync(path.join(pathToTasks, req.body.file), parserData.parseToDate(JSON.parse(req.body.item).items));
+
+        updateTasks();
+        res.setHeader('Content-Type', 'application/json');
+        res.end();
     })
 
     .listen(PORT);

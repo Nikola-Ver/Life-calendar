@@ -153,13 +153,12 @@ const Calendar: React.FC<CalendarProps> = (props) => {
       let newArrOfDoneTasks = arrOfDoneTasks;
 
       fetch('./index.js', {
-        method: 'POST',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
         body: JSON.stringify({
-          type: "DELETE",
           file: `${newArrOfDoneTasks[0][index].date.day < 10 ?
             `0${newArrOfDoneTasks[0][index].date.day.toString()}` :
             newArrOfDoneTasks[0][index].date.day}.${newArrOfDoneTasks[0][index].date.month < 10 ?
@@ -308,14 +307,11 @@ const Calendar: React.FC<CalendarProps> = (props) => {
 
   function addNewCell(): void {
     fetch('./index.js', {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        type: "ADD"
-      })
+      }
     }).then(() => {
       fetch('./index.js',
         {
